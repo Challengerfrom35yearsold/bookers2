@@ -1,0 +1,20 @@
+<h2>User info</h2>
+<%= image_tag user.get_profile_image(100,100) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <th><%#= @user.introduction %></th>
+    </tr>
+  </thead>
+</table>
+
+<% if user == current_user %>
+  <%= link_to "編集", edit_user_path(user.id) %>
+<% else %>
+  <%= link_to "編集", user_path(current_user.id) %>
+<% end %>

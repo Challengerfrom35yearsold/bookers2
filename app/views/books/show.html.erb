@@ -1,0 +1,33 @@
+<%#= render 'users/new_user', user: @user %>
+<%= render 'books/new_book', book: @book %>
+
+<h2>Book detail</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to user_path(@book.user.id) do %>
+          <%= image_tag @book.user.get_profile_image(100,100) %><br>
+          <%= @book.user.name %>
+        <% end %>
+        </td>
+      <td>
+        <%= @book.title %>
+      </td>
+      <td>
+       <%= @book.body %>
+      </td>
+      <td>
+        <% if @book.user == current_user %>
+        <%= link_to "Edit", edit_book_path(@book.id) %>
+        <% end %>
+      </td>
+      <td>
+        <% if @book.user == current_user %>
+        <%= link_to "Destroy", book_path(@book), method: :delete %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
