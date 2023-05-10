@@ -10,36 +10,59 @@
 
 <%= flash[:notice] %>
 
-<%= render 'users/new_user', user: @user %>
-<%= render 'books/new_book', book: @book %>
 
-<h2>Book detail</h2>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>
-        <%= link_to user_path(@book.user.id) do %>
-          <%= image_tag @book.user.get_profile_image(100,100) %><br>
-          <%= @book.user.name %>
-        <% end %>
-        </td>
-      <td>
-        <%= @book.title %>
-      </td>
-      <td>
-       <%= @book.body %>
-      </td>
-      <td>
-        <% if @book.user == current_user %>
-        <%= link_to "Edit", edit_book_path(@book.id) %>
-        <% end %>
-      </td>
-      <td>
-        <% if @book.user == current_user %>
-        <%= link_to "Destroy", book_path(@book), method: :delete %>
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/new_user', user: @user %>
+      <%= render 'books/new_book', book: @books %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@book.user.id) do %>
+                <%= image_tag @book.user.get_profile_image(100,100) %><br>
+                <%= @book.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(@book.id) do %>
+                <%= @book.title %>
+              <% end %>
+            </td>
+            <td>
+             <%= @book.body %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to(edit_book_path(@book.id), class:"btn btn-sm btn-success") do %>
+                Edit
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to(book_path(@book), method: :delete, class:"btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？") do %>
+                Destroy
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
+<footer>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="mx-auto">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </div>
+</footer>
